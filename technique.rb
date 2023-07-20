@@ -5,15 +5,23 @@ def time_it(&block)
   return_value = block.call
   end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
-  puts "It took #{(end_time - start_time)} ms"
+  puts "It took #{(end_time - start_time)}s"
 
   return return_value
 end
 
-def expensive_method
-  sleep 2
+class Foo
+  def expensive_method
+    sleep 2
 
-  return :expensive_calculation
+    return :expensive_calculation
+  end
+
+  alias_method :old_expensive_method, :expensive_method
+
+  def expensive_calculation
+    time_it { old_expensive_method }
+  end
 end
 
-puts expensive_method
+puts Foo.new.expensive_calculation

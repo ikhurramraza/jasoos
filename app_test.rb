@@ -12,8 +12,6 @@ class CarTest < Minitest::Test
   end
 
   def test_simple
-    skip
-
     @car1 = Car.new("Suzuki")
     @car2 = Car.new("Toyota")
 
@@ -34,8 +32,6 @@ class CarTest < Minitest::Test
   end
 
   def test_kwargs
-    skip
-
     calls = SpyHelper.spy_on(@car, method: :honk) { @car.honk(2, sound: :boop) }
 
     assert_equal 1, calls.length
@@ -49,8 +45,6 @@ class CarTest < Minitest::Test
   end
 
   def test_multiple_calls
-    skip
-
     calls =
       SpyHelper.spy_on(@car, method: :honk) do
         @car.honk(3)
@@ -75,8 +69,6 @@ class CarTest < Minitest::Test
   end
 
   def test_multiple_methods
-    skip
-
     calls =
       SpyHelper.spy_on(@car, methods: %i[honk drive]) do
         @car.honk(5)
@@ -101,8 +93,6 @@ class CarTest < Minitest::Test
   end
 
   def test_any_instance
-    skip
-
     @car1 = Car.new("Suzuki")
     @car2 = Car.new("Toyota")
 
